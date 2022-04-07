@@ -8,7 +8,8 @@ const getRandomHexColor = () =>
     `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
 const textInputEl = document.createElement('p');
-textInputEl.textContent = 'Enter the quantity of buttons: \n';
+textInputEl.textContent =
+    'Enter the quantity of buttons, change focus and click on button \n';
 document.body.append(textInputEl);
 
 const inputEl = document.createElement('input');
