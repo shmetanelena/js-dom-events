@@ -13,3 +13,42 @@
 */
 
 let counter = 10;
+const divEl = document.querySelector('#size-control');
+const spanEl = document.querySelector('#size-control > span');
+spanEl.textContent = counter;
+
+const valueEl = document.createElement('input');
+valueEl.style.width = '60px';
+valueEl.style.fontSize = '25px';
+valueEl.textContent = counter;
+//divEl.after(valueEl);
+const textEl = document.createElement('p');
+textEl.textContent = 'Enter a positive or negative namber:';
+textEl.style.fontStyle = 'oblique';
+textEl.style.fontWeight = 'bold';
+valueEl.before(textEl);
+valueEl.addEventListener('change', event => updateCounter(event.currentTarget.value));
+
+const decrBtnEl = document.querySelector('button[data-action ="decrease"]');
+decrBtnEl.addEventListener('click', event => updateCounter(-1));
+const incrBtnEl = document.querySelector('button[data-action="increase"]');
+incrBtnEl.addEventListener('click', event => updateCounter(1));
+// == можно по значению любого атрибута вытаскивать!!! )))
+const test = document.querySelector('a[href="index.html"]');
+console.log(test);
+
+document.addEventListener('keydown', event => {
+    event.preventDefault();
+    if (event.key === 'ArrowUp') {
+        updateCounter(event.shiftKey ? 10 : 1);
+    } else if (event.key === 'ArrowDown') {
+        updateCounter(event.shiftKey ? -10 : -1);
+    }
+    console.log('key: ', event.key);
+    console.log('code: ', event.code);
+});
+
+const updateCounter = value => {
+    const sum = (spanEl.textContent = counter + Number(value));
+    counter = sum;
+};

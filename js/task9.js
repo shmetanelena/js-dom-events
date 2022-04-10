@@ -25,3 +25,16 @@
         Если бы вызывало, то можно было бы написаь select.value = {hex-код}, далее произошло бы событие 'change', 
         вызвался написанный нами обработчик и фон бы имзенился автоматически. Но событие не вызывается (.
 */
+
+const selectEl = document.querySelector('select');
+selectEl.addEventListener('change', event => {
+    let color = event.currentTarget.value;
+    document.body.style.backgroundColor = color;
+});
+
+colors.forEach(color => {
+    const optionEll = document.createElement('option');
+    optionEll.setAttribute('value', `${color.hex}`);
+    optionEll.textContent = `${color.name}`;
+    selectEl.append(optionEll);
+});

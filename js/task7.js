@@ -29,3 +29,41 @@
     Можно перечитать статью 'Селекторы' Модуля 2.
 
 */
+const btnEl = document.querySelector('#button');
+
+const inputEl = document.querySelector('#button-text > input');
+
+inputEl.addEventListener('input', event => {
+    btnEl.textContent = event.currentTarget.value;
+});
+
+const textToAlert = event => alert(event.currentTarget.textContent);
+const textToConsole = event => console.log(event.currentTarget.textContent);
+
+const checkboxBtnEl = document.querySelector('#checkbox-button-alert > input');
+
+const setBtnEventListener = (checkbox, onBtnClick) => {
+    if (checkbox.checked) {
+        btnEl.addEventListener('click', onBtnClick);
+    } else {
+        btnEl.removeEventListener('click', onBtnClick);
+    }
+};
+
+checkboxBtnEl.addEventListener('change', event => setBtnEventListener(event.currentTarget, textToAlert));
+
+const checkboxConsolEl = document.querySelector('#listeners > div[data-type="checkbox-button-console"] > input');
+checkboxConsolEl.addEventListener('change', event => setBtnEventListener(event.currentTarget, textToConsole));
+
+const checkActiveBtnEl = document.querySelector('#checkbox-button-enable');
+checkActiveBtnEl.addEventListener('change', event => (btnEl.disabled = event.currentTarget.checked));
+
+const checkVisibleBtnEl = document.querySelector('#checkbox-button-visible');
+checkVisibleBtnEl.addEventListener('change', event => {
+    /*if (event.currentTarget.checked) {
+        btnEl.classList.add('unvisible');
+    } else {
+        btnEl.classList.remove('unvisible');
+    }*/
+    btnEl.classList.toggle('unvisible');
+});

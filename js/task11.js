@@ -9,3 +9,16 @@
 
 
 */
+const onClick = event => {
+    const btnColor = event.currentTarget.dataset.color;
+    document.body.style.backgroundColor = btnColor;
+};
+colors.forEach(color => {
+    const btnEl = document.createElement('button');
+    btnEl.textContent = `${color.name}`;
+    btnEl.style.background = `${color.hex}`;
+    btnEl.style.margin = '10px';
+    btnEl.setAttribute('data-color', `${color.hex}`);
+    document.body.append(btnEl);
+    btnEl.addEventListener('click', onClick);
+});
