@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Task 6</title>
+        <link rel="stylesheet" href="css/common.css" />
+        <style>
+            .box {
+                width: 256px; 
+                height: 256px;
+                border-style: solid;
+                border-color: black;
+                border-width: 1px;
+            }
+            input {
+                width: 256px;
+            }
+        </style>
+    </head>
+    <body>
+        <p><a href="index.html">Go back</a></p>
+        <div>
+            <label for="red">Red:</label>
+            <input id="red" type="range" min="0" max="255"/>
+        </div>
+        <div>
+            <label for="green">Green:</label>
+            <input id="green" type="range" min="0" max="255"/>
+        </div>
+        <div>
+            <label for="blue">Blue:</label>
+            <input id="blue" type="range" min="0" max="255"/>
+        </div>
+        <div class="box"></div>
+        <script src="js/task6.js" type="module"></script>
+    </body>
+</html>

@@ -9,7 +9,7 @@ const getRandomHexColor = () =>
 
 const textInputEl = document.createElement('p');
 textInputEl.textContent =
-    'Enter the quantity of buttons, change focus and click on button \n';
+    '1)Enter the quantity of buttons, 2) click "Enter" or change focus and 3) click on button';
 document.body.append(textInputEl);
 
 const inputEl = document.createElement('input');

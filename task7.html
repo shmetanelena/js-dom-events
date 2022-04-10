@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Task 7</title>
+        <link rel="stylesheet" href="css/common.css" />
+        <style>
+            .unvisible {
+                visibility: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <p><a href="index.html">Go back</a></p>
+        <div>
+            <button id="button">Text</button>
+            <div id="button-text">
+                <label>Button text</label>
+                <input type="text" value="Text"></input>
+            </div>
+            <div id="listeners">
+                <div id="checkbox-button-alert">
+                    <input type="checkbox"></input>
+                    <label>Alert with button text</label>
+                </div>
+                <div data-type="checkbox-button-console">
+                    <input type="checkbox"></input>
+                    <label>Print button text to console</label>
+                </div>
+            </div>
+            <div>
+                <input id="checkbox-button-enable" type="checkbox"></input>
+                <label for="checkbox-button-enable">Disable button</label>
+            </div>
+            <div>
+                <input id="checkbox-button-visible" type="checkbox"></input>
+                <label for="checkbox-button-visible">Visible button</label>
+            </div>
+        </div>
+        <script src="js/task7.js" type="module"></script>
+    </body>
+</html>

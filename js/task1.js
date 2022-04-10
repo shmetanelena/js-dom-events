@@ -36,3 +36,14 @@ const onButtonClick = event => {
 };
 
 buttonEl.addEventListener('click', onButtonClick);
+
+const btnClearEl = document.createElement('button');
+btnClearEl.textContent = 'Clear All';
+document.body.append(btnClearEl);
+
+const onClearAll = event => {
+    place.querySelectorAll('div').forEach(elem => elem.remove());
+    console.log('allDivEl');
+};
+
+btnClearEl.addEventListener('click', onClearAll);

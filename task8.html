@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Task 8</title>
+        <link rel="stylesheet" href="css/common.css" />
+        <style>
+            .value {
+                /* font-weight: bold; */
+                font-style: italic;
+            }
+        </style>
+    </head>
+    <body>
+         <p><a href="index.html">Go back</a></p>
+        <div id="select-user">
+            <label>User:</label>
+            <select></select>
+            <div id="user-email">
+                <label>Email:</label>
+                <label class="value"></label>
+            </div>
+            <div id="user-balance">
+                <label>Balance:</label>
+                <label class="value"></label>
+            </div>
+            <div id="user-friends">
+                <label>Friends:</label>
+                <select></select>
+            </div>
+            <div id="user-active">
+                <label>Is active:</label>
+                <input type="checkbox" disabled></input>
+            </div>
+            <div id="user-eye-color">
+                <label>Eye color:</label>
+                <label class="value"></label>
+            </div>
+        </div>
+        <script src="js/users.js" type="module"></script>
+        <script src="js/colors.js" type="module"></script>
+        <script src="js/task8.js" type="module"></script>
+    </body>
+</html>
