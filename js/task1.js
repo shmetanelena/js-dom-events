@@ -6,8 +6,7 @@
 3.  Добавить кнопку "Clear All", при нажатии на которую будут удаляться все элементы
  */
 
-const getRandomHexColor = () =>
-    `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+const getRandomHexColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
 const buttonEl = document.querySelector('#button-add-div');
 const place = document.querySelector('#place');
@@ -39,7 +38,7 @@ buttonEl.addEventListener('click', onButtonClick);
 
 const btnClearEl = document.createElement('button');
 btnClearEl.textContent = 'Clear All';
-document.body.append(btnClearEl);
+buttonEl.after(btnClearEl);
 
 const onClearAll = event => {
     place.querySelectorAll('div').forEach(elem => elem.remove());

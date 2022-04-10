@@ -10,6 +10,7 @@ const rangeEl = document.querySelector('#size-control > input');
 
 const setSpan = () => {
     spanEl.textContent = `${rangeEl.value}`;
+    spanEl.style.fontSize = `${rangeEl.value}px`;
 };
 
 rangeEl.addEventListener('change', setSpan);
