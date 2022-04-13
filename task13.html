@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Task 13</title>
+        <link rel="stylesheet" href="css/common.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+        <style>
+            select#users {
+                margin: 40px auto 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="row">
+            <select id="users" class="browser-default">
+                <option value="" disabled selected>Select user</option>
+            </select>
+        </div>
+        <div class="row">
+            <form id="user-form" class="container"> 
+                <div class="row">
+                    <label for="user-email">Email</label>
+                    <input type="text" name="email" id="user-email" placeholder="Enter the user email">
+                </div>
+                <div class="row">
+                    <label for="user-balance">Balance</label>
+                    <input type="number" name="balance" id="user-balance" placeholder="Enter the user balance">
+                </div>
+                <div class="row">
+                    <input type="checkbox" name="is_active" id="user-is_active">
+                    <label for="user-is_active">Active</label>
+                </div>
+                <div class="row">
+                    <label for="user-friends">Friends</label>
+                    <select id="user-friends" name="friends" class="browser-default"></select>
+                </div>
+                <div class="row">
+                    <label for="user-gender">Gender</label>
+                    <div class="switch">
+                        <label>
+                            Female
+                            <input type="checkbox" name="gender">
+                            <span class="lever"></span>
+                            Male
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="user-eye-color">Eye color</label>
+                    <select id="user-eye-color" name="eye_color" class="browser-default">
+                        <option value="" disabled selected>Select eye color</option>
+                    </select>
+                </div>
+                <div><button type="sumbit" class="btn">Update</button></div>
+            </form>
+        </div> 
+        <script src="js/users.js" type="module"></script>
+        <script src="js/colors.js" type="module"></script>
+        <script src="js/task13.js" type="module"></script>    
+    </body>
+</html>

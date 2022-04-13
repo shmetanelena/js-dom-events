@@ -27,10 +27,35 @@
 */
 
 const selectEl = document.querySelector('select');
-selectEl.addEventListener('change', event => {
-    let color = event.currentTarget.value;
+
+const setColor = color => {
     document.body.style.backgroundColor = color;
+};
+
+selectEl.addEventListener('change', event => {
+    //let color = event.currentTarget.value;
+    //document.body.style.backgroundColor = color;
+    setColor(event.currentTarget.value);
 });
+
+colors.forEach(color => {
+    const optionEll = document.createElement('option');
+    optionEll.setAttribute('value', `${color.hex}`);
+    optionEll.textContent = `${color.name}`;
+    optionEll.style.backgroundColor = color.hex;
+    selectEl.append(optionEll);
+});
+//  )))))) Психанула
+//document.body.style.backgroundColor = '#000000';
+
+const defColor = colors.find(color => color.name === 'Black').hex;
+selectEl.value = defColor;
+setColor(defColor);
+
+/*const setColor = color => {
+    document.body.style.backgroundColor = color;
+};
+selectEl.addEventListener('change', setColor(event.currentTarget.value));
 
 colors.forEach(color => {
     const optionEll = document.createElement('option');
@@ -38,3 +63,6 @@ colors.forEach(color => {
     optionEll.textContent = `${color.name}`;
     selectEl.append(optionEll);
 });
+
+setColor(color);
+*/

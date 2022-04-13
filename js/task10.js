@@ -20,12 +20,37 @@
     - зная индекс нужного товара можно получить сам товар из фукнции getProduct(index)
 */
 
-const getProduct = (index) => {
+const getProduct = index => {
     return {
-        id: index, 
-        name: `Product #${index}`, 
-        code: (1000 + index), 
+        id: index,
+        name: `Product #${index}`,
+        code: 1000 + index,
         price: (index + 1) / 100,
-        amount: Math.floor(Math.random() * 100)
+        amount: Math.floor(Math.random() * 100),
     };
 };
+
+const buttonEl = document.querySelector('button');
+const selectEl = document.querySelector('select');
+const inputEl = document.querySelector('input');
+
+const fillSelect = () => {
+    selectEl.querySelectorAll('option').forEach(elem => elem.remove());
+    const count = inputEl.value;
+    for (let i = 0; i < count; i += 1) {
+        const product = getProduct(i);
+        const optionEl = document.createElement('option');
+        optionEl.textContent = product.name;
+        selectEl.append(optionEl);
+    }
+};
+
+buttonEl.addEventListener('click', fillSelect);
+
+inputEl.addEventListener('change', fillSelect);
+
+selectEl.addEventListener('change', event => {
+    const index = event.currentTarget.selectedIndex;
+    const product = getProduct(index);
+    console.log(product);
+});
