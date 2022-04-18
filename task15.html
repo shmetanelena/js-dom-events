@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Task 15</title>
+        <link rel="stylesheet" href="css/common.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    </head>
+    <body>
+        <div>
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Balance</th>
+                        <th>Active</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <button class="btn" id="user-add">Add</button>
+        </div>
+        <div id="user-form-modal" class="modal">
+            <div class="modal-content">
+                <h5 id="user-form-title">User</h5>
+                <form id="user-form"> 
+                    <div class="row">
+                        <label for="user-name">Name</label>
+                        <input type="text" name="name" id="user-name" placeholder="Enter the user name">
+                    </div>
+                    <div class="row">
+                        <label for="user-balance">Balance</label>
+                        <input type="number" name="balance" id="user-balance" placeholder="Enter the user balance">
+                    </div>
+                    <div class="row">
+                        <input type="checkbox" name="is_active" id="user-is_active">
+                        <label for="user-is_active">Active</label>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">OK</a>
+                </div>
+            </div>
+        </div>
+        <script src="js/users.js" type="module"></script>
+        <script src="js/colors.js" type="module"></script>
+        <script src="js/task15.js" type="module"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    </body>
+</html>

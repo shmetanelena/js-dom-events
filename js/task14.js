@@ -176,3 +176,138 @@ const nextTask = () => {
     inputEl.value = colors[2].hex;
     div.append(inputEl, datalistEl);
 }
+//=== 6 ===
+/*
+    Свойству innerHTML корневого div данной задачи присвоить HTML-строку: 
+    '<div><input type="checkbox"><label>Select all</label></div><div><input type="checkbox"><input type="checkbox"><input type="checkbox"></div>'
+    Найти чекбокс с меткой "Select all" и 3 остальных безымянных чекбокса (для их поиска можно использовать querySelectorAll).
+    Написать обработчик события "change" для чекбокса "Select all" чтобы, если он checked, все безымянные также установились, 
+    а иначе - все сбросились.
+
+    =====
+    Сорри, есть поправки к задачам 14.6, 14.7.
+    Было указано, что следует указанную в задаче HTML-строку присвоить div.innerHTML. 
+    На самом деле, лучше вставить строку за последним дочерним элементом div-а. 
+    Для этого мы используем, div.insertAdjacentHTML('beforeend', ...).
+
+    Для поиска вставленных div-в и input-ов в них работаем со свойствами lastElementChild, 
+    previousElementSibling, firstElementChild и querySelectorAll при необходимости.
+    ===
+ */
+{
+    const div = nextTask();
+    div.insertAdjacentHTML(
+        'beforeend',
+        '<div><input type="checkbox"><label>Select all</label></div><div><input type="checkbox"><input type="checkbox"><input type="checkbox"></div>'
+    );
+
+    const checkSelectAll = div.firstElementChild.nextElementSibling.firstElementChild;
+    const checks = div.lastElementChild.children;
+    checkSelectAll.addEventListener('change', () => {
+        for (let i = 0; i < checks.length; i++) {
+            checks[i].checked = checkSelectAll.checked;
+        }
+    });
+}
+//=== 7 ===
+/*
+Свойству innerHTML корневого div данной задачи присвоить HTML-строку: 
+    '<div><input type="checkbox" disabled><label>Select all</label></div><div></div>'
+    Создать массив checkboxes. Создать и добавить в массив 3 чекбокса (используем цикл for).
+    Добавить элементы массива checkboxes в вл второй вложенный div (используем append(...checkboxes)).
+    Создать функцию setSelectAll(), которая:
+        - устанавливает чекбокс 'Select all' (делает его checked=true), 
+        если установлены все чексбоксы массива checkboxes (то есть, у них всех checked равен true) 
+        - сбрасывает чекбокс 'Select all' (checked=false), если хоть один из чексбоксов не установлен 
+    Для проверки используем функцию массива every.
+
+    Установить для всех чексбоксы массива checkboxes функцию setSelectAll как обрабочик события 'change'.
+    */
+{
+    const div = nextTask();
+    div.insertAdjacentHTML(
+        'beforeend',
+        '<div><input type="checkbox" disabled><label>Select all</label></div><div></div>'
+    );
+
+    let checkboxes = [];
+    for (let i = 0; i < 3; i++) {
+        const inputEl = document.createElement('input'); //<input type="checkbox" disabled>
+        inputEl.type = 'checkbox';
+        checkboxes.push(inputEl);
+    }
+    const divLast = div.lastElementChild;
+    divLast.append(...checkboxes);
+
+    const checkEll = divLast.previousElementSibling.firstElementChild;
+    const setSelectAll = () => (checkEll.checked = checkboxes.every(checkbox => checkbox.checked));
+    checkboxes.forEach(checkbox => checkbox.addEventListener('change', setSelectAll));
+}
+
+//=== 8 ===
+/*
+Задача 8.
+    Создать элемент input с type = 'number', с текущим значением (value) равным 1.
+    Добавить обработчик на событие 'input', который добавляет в div N кнопок, где N - текущее значении input-а.
+    Каждая кнопка имеет название - порядковый номер. То есть, если в input указано 3, то создается 3 кнопки с названиями
+    "1", "2", "3".
+    При нажатии на кнопку - выводим в консоль ее название.
+ */
+{
+    const div = nextTask();
+    const inputEl = document.createElement('input');
+    inputEl.type = 'number';
+    inputEl.setAttribute('value', '1');
+    // inputEl.setAttribute('min', '1');
+    // inputEl.setAttribute('max', '100');
+    // inputEl.setAttribute('step', '5');
+
+    div.append(inputEl);
+
+    inputEl.addEventListener('change', createButtons(inputEl.currentTarget.value));
+
+    const createButtons = number => {
+        document.querySelectorAll('button').forEach(elem => elem.remove());
+        for (let i = 1; i <= number; i++) {
+            const btnEl = document.createElement('button');
+            btnEl.textContent = `Button number ${i}`;
+            btnEl.append(inputEl);
+            btnEl.addEventListener('click', onClick);
+        }
+    };
+    const onClick = event => console.log(`${event.currentTarget.textContent}`);
+}
+
+//=== 9 ===
+/*
+Задача 9.
+    Создать элемент select и заполнить его значениями из массива users.
+    Для каждой опции устанавливаем: текст - имя пользователя, атрибут value - email пользователя.
+    1. При выборе пользователя в select найти соответствующий объект и вывести его в консоль.
+    2. Установить значение value элемента select равным "careybarr@nurali.com".
+
+ */
+{
+    const div = nextTask();
+}
+//=== 10 ===
+/*
+Задача 10.
+    Создать массив buttons на основе массива users. Используем функцию map.
+    У каждой кнопки установить:
+        - название - фамилия пользователя, то есть у "Moore Hensley" будет "Hensley"; используем функцию для разделитель split();
+        - id - строка task-${currentTaskNumber}-user-${index}, где index - индекс в массиве users;
+    При нажатии на кнопку выводим alert с сообщением:
+        User: <полное имя пользователя (name)>
+        Friends: <спискок друзей в виде одной строки, при этом разделитель между именами друзей - строка "; ">
+    Добавить элементы массива в div - div.append(...buttons).
+
+    Пример использования split:
+    В результате:
+        const [first, second, third, fourth] = 'one_two_three_four'.split('_');
+    имеем first="one" second="two" third="three" fourth="four"
+
+ */
+{
+    const div = nextTask();
+}

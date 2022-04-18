@@ -1,4 +1,4 @@
-window.users = [
+const users = [
     {
         name: 'Moore Hensley',
         email: 'moorehensley@indexia.com',
@@ -63,3 +63,5 @@ window.users = [
         gender: 'female',
     },
 ];
+
+module.exports = users;

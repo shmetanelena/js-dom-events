@@ -18,7 +18,7 @@
     Поля is_active, gender устанавливаем через свойство checked.
     Список опций для поля friends формируем в виде HTML-строки, которую присваиваем свойству innerHTML элемента.
 
-3.  При нажатии кнопки Update (событие 'submit' формы) нужно обновить данные текущего пользователя.
+4.  При нажатии кнопки Update (событие 'submit' формы) нужно обновить данные текущего пользователя.
     При этом, изменяем поля пользователя, только если они отличаются, то есть были изменены через элементы формы.
     То есть, сравниваем значение элемента email формы (value) со значением поля email объекта пользователя,
     и, если они не равны, то перезаписываем значение поля email объекта пользователя значением элемента email формы.
@@ -26,12 +26,10 @@
 */
 
 const formEl = document.querySelector('#user-form');
-const colorEl = document.querySelector('select#user-eye-color');
-colorEl.innerHTML = colors.map(color => `<option value="${color.name.toLowerCase()}">${color.name}</option>`).join('');
-colorEl.addEventListener('change', event => console.log(event.currentTarget.value));
-
 const { email, is_active, balance, friends, gender, eye_color } = formEl.elements;
-//console.log(email, is_active, balance, friends, gender, eye_color);
+eye_color.innerHTML = colors
+    .map(color => `<option value="${color.name.toLowerCase()}">${color.name}</option>`)
+    .join('');
 
 const selectEl = document.querySelector('select#users');
 selectEl.insertAdjacentHTML(
@@ -40,41 +38,21 @@ selectEl.insertAdjacentHTML(
 );
 selectEl.addEventListener('change', event => {
     const user = users[event.currentTarget.value];
-    console.log(user);
     email.value = user.email;
     balance.value = user.balance;
     is_active.checked = user.isActive;
-    gender.checked = user.gender === 'male';
-    friends.innerHTML = user.friends.map(friend => `<option>${friend}</option>`).join('');
+    gender.checked = user.gender == 'male';
+    const html = user.friends.map(friend => `<option>${friend}</option>`).join('');
+    friends.innerHTML = html;
     eye_color.value = user.eyeColor;
 });
 
 formEl.addEventListener('submit', event => {
     event.preventDefault();
-    let user = users[selectEl.value];
-    let changed = false;
-    if (user.email != email.value) {
-        user.email = email.value;
-        changed = true;
-    }
-    if (user.balance != balance.value) {
-        user.balance = balance.value;
-        changed = true;
-    }
-    if (user.isActive !== is_active.checked) {
-        user.isActive = is_active.checked;
-        changed = true;
-    }
-    const newGender = gender.checked ? 'male' : 'female';
-    if (user.gender != newGender) {
-        user.gender = newGender;
-        changed = true;
-    }
-    if (user.eyeColor != eye_color.value) {
-        user.eyeColor = eye_color.value;
-        changed = true;
-    }
-    if (changed) {
-        console.log('User was changed', user);
-    }
+    const user = users[selectEl.value];
+    user.email = email.value;
+    user.balance = balance.value;
+    user.isActive = is_active.checked;
+    user.gender = gender.checked ? 'male' : 'female';
+    user.eyeColor = eye_color.value;
 });

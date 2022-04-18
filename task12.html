@@ -7,6 +7,7 @@
         <title>Task 12</title>
         <link rel="stylesheet" href="css/common.css" />
         <link rel="stylesheet" href="css/tooltip.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
         <style>
             table {
                 margin: 40px 40px;
@@ -17,24 +18,26 @@
         </style>
     </head>
     <body>
-        <table>
-            <thead>
-                <tr>
-                    <th>
-                        <div class="tooltip">
-                            <input type="checkbox">
-                            </input>
-                            <span class="tooltiptext">Select all</span>
-                        </div>
-                    </th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Balance</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+        <form>
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="tooltip">
+                                <input type="checkbox" id="select-all"></input>
+                                <label for="select-all"></label>
+                                <span class="tooltiptext">Select all</span>
+                            </div>
+                        </th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </form>
         <label>Total balance:</label>
         <label class="value">0</label>
         <script src="js/users.js" type="module"></script>
