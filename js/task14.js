@@ -258,20 +258,21 @@ const nextTask = () => {
     const inputEl = document.createElement('input');
     inputEl.type = 'number';
     inputEl.setAttribute('value', '1');
+    //===  можно добавлять такие атрибути:
     // inputEl.setAttribute('min', '1');
     // inputEl.setAttribute('max', '100');
     // inputEl.setAttribute('step', '5');
-
     div.append(inputEl);
 
-    inputEl.addEventListener('change', createButtons(inputEl.currentTarget.value));
+    inputEl.addEventListener('input', event => createButtons(event.currentTarget.value));
 
     const createButtons = number => {
         document.querySelectorAll('button').forEach(elem => elem.remove());
-        for (let i = 1; i <= number; i++) {
+        for (let i = 1; i <= number; i += 1) {
             const btnEl = document.createElement('button');
-            btnEl.textContent = `Button number ${i}`;
-            btnEl.append(inputEl);
+            //btnEl.textContent = `Button number ${i}`;
+            btnEl.textContent = i;
+            div.append(btnEl);
             btnEl.addEventListener('click', onClick);
         }
     };
@@ -289,6 +290,36 @@ const nextTask = () => {
  */
 {
     const div = nextTask();
+    const selectEl = document.createElement('select');
+    div.append(selectEl);
+
+    const showUserByEmail = email => console.log(users.find(user => user.email === email));
+    const onChange = e => showUserByEmail(e.currentTarget.value);
+
+    /*
+    const onChange2 = e => {
+        //const index = e.currentTarget.selectedIndex;
+        //const name = e.currentTarget.options[index].text;
+        //console.log(`Пользователь: ${name} -> ${e.currentTarget.value}`);
+        //console.log('Весь обект: ', users[`${index}`]);
+
+        const email = e.currentTarget.value;
+        const user = users.find(user => user.email === email);
+        console.log(user);
+    };
+    */
+
+    users.forEach(user => {
+        const optionEl = document.createElement('option');
+        optionEl.textContent = user.name;
+        optionEl.value = user.email;
+        selectEl.append(optionEl);
+    });
+    selectEl.addEventListener('change', onChange);
+
+    //selectEl.value = 'careybarr@nurali.com';
+    selectEl.value = 'shereeanthony@kog.com';
+    showUserByEmail(selectEl.value);
 }
 //=== 10 ===
 /*
@@ -310,4 +341,24 @@ const nextTask = () => {
  */
 {
     const div = nextTask();
+
+    const onClick = event => {
+        const id = event.currentTarget.id;
+        const [task_, tasskNum_, user_, index] = id.split('-');
+        const user = users[index];
+        const userName = user.name;
+        const friends = user.friends.join('; ');
+        alert(`User: ${userName}\nFriends: ${friends}`);
+    };
+
+    const buttons = users.map((user, index) => {
+        const [firstName, secondName] = user.name.split(' ');
+        const btnEl = document.createElement('button');
+        btnEl.textContent = secondName;
+        btnEl.setAttribute('id', `task-${currentTaskNumber}-user-${index}`);
+        //btnEl.id = ..
+        btnEl.addEventListener('click', onClick);
+        return btnEl;
+    });
+    div.append(...buttons);
 }

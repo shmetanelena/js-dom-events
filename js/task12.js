@@ -27,5 +27,47 @@
 4.  Решим вместе. 
     При нажатии чекбоксов постоянно пересчитываем общий баланс, который считается как сумма балансов всех выбранных пользователей.
     Результат записывается в label с class="value".
+
+    
     
 */
+
+const tbodyEl = document.querySelector('.striped > tbody');
+const checkboxAllEl = document.querySelector('.tooltip > input');
+const labelEl = document.querySelector('label.value');
+
+tbodyEl.innerHTML = users
+    .map(
+        (user, index) =>
+            `<tr>
+        <td><input type="checkbox" id="${index}" data-index="${index}"><label for="${index}"></label></td>
+        <td>${user.name}</td>
+        <td>${user.email}</td>
+        <td>${user.balance}</td>
+    </tr>
+    `
+    )
+    .join('');
+
+const checkboxes = tbodyEl.querySelectorAll('input[type="checkbox"]');
+
+checkboxAllEl.addEventListener('change', () => {
+    for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = checkboxAllEl.checked;
+    }
+});
+
+const checkboxClicked = e =>
+    console.log(
+        `User ${users[e.currentTarget.dataset.index].name} ${e.currentTarget.checked ? 'checked' : 'unchecked'}`
+    );
+checkboxes.forEach(checkbox => checkbox.addEventListener('change', checkboxClicked));
+
+const recalcBalance = () => {
+    const value = users
+        .filter((user, index) => checkboxes[index].checked)
+        .reduce((prevValue, user) => prevValue + user.balance, 0);
+    labelEl.textContent = value;
+};
+checkboxes.forEach(checkbox => checkbox.addEventListener('change', recalcBalance));
+checkboxAllEl.addEventListener('change', recalcBalance);
