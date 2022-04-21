@@ -26,10 +26,7 @@
     
 4.  Решим вместе. 
     При нажатии чекбоксов постоянно пересчитываем общий баланс, который считается как сумма балансов всех выбранных пользователей.
-    Результат записывается в label с class="value".
-
-    
-    
+    Результат записывается в label с class="value".    
 */
 
 const tbodyEl = document.querySelector('.striped > tbody');
@@ -40,22 +37,40 @@ tbodyEl.innerHTML = users
     .map(
         (user, index) =>
             `<tr>
-        <td><input type="checkbox" id="${index}" data-index="${index}"><label for="${index}"></label></td>
-        <td>${user.name}</td>
-        <td>${user.email}</td>
-        <td>${user.balance}</td>
-    </tr>
-    `
+            <td><input type="checkbox" id="${index}" data-index="${index}"><label for="${index}"></label></td>
+            <td>${user.name}</td>
+            <td>${user.email}</td>
+            <td>${user.balance}</td>
+         <\tr>`
     )
     .join('');
 
 const checkboxes = tbodyEl.querySelectorAll('input[type="checkbox"]');
+console.log(checkboxes);
 
 checkboxAllEl.addEventListener('change', () => {
     for (let i = 0; i < checkboxes.length; i++) {
         checkboxes[i].checked = checkboxAllEl.checked;
     }
 });
+
+const onCheckboxClicked = event =>
+    console.log(
+        `User: ${users[event.currentTarget.dataset.index].name}, ${event.currentTarget.checked ? 'checked' : 'checked'}`
+    );
+
+checkboxes.forEach(checkbox => checkbox.addEventListener('change', onCheckboxClicked));
+
+//const labelValue = 0;
+const calcBalance = e => {
+    const value = users
+        .filter((user, index) => checkboxes[index].checked)
+        .reduce((prevValue, user) => prevValue + user.balance, 0);
+    labelEl.textContent = value;
+};
+checkboxes.forEach(checkbox => checkbox.addEventListener('change', calcBalance));
+
+/*
 
 const checkboxClicked = e =>
     console.log(
@@ -71,3 +86,4 @@ const recalcBalance = () => {
 };
 checkboxes.forEach(checkbox => checkbox.addEventListener('change', recalcBalance));
 checkboxAllEl.addEventListener('change', recalcBalance);
+*/
